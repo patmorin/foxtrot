@@ -4,7 +4,7 @@
 %for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
 %for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
 % for section-numbered lemmas etc., use "numberwithinsect"
- 
+
 \usepackage{microtype}%if unwanted, comment out or use option "draft"
 
 %\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
@@ -12,33 +12,34 @@
 \bibliographystyle{plainurl}% the recommended bibstyle
 
 % Author macros::begin %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{First-Passage Percolation Time \newline on Hypercubes and Grids}
+\title{First-Passage Percolation Time on Hypercubes}
 
 \titlerunning{First-Passage Percolation Time}
 
-\author[1]{Pat Morin}
-\affil[1]{Carleton University School of Computer Science, Ottawa, Canada \\
-   \texttt{morin@scs.carleton.ca}a}
-\authorrunning{P. Morin} %mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
+\author{Pat Morin and others}
+%\author[1]{Pat Morin}
+%\affil[1]{Carleton University School of Computer Science, Ottawa, Canada \\
+%   \texttt{morin@scs.carleton.ca}}
+%\authorrunning{P. Morin} %mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
 
 \Copyright{P. Morin}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
-\subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
-\keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
-% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%\subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
+%\keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
+%% Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 %Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\EventEditors{John Q. Open and Joan R. Acces}
-\EventNoEds{2}
-\EventLongTitle{42nd Conference on Very Important Topics (CVIT 2016)}
-\EventShortTitle{CVIT 2016}
-\EventAcronym{CVIT}
-\EventYear{2016}
-\EventDate{December 24--27, 2016}
-\EventLocation{Little Whinging, United Kingdom}
-\EventLogo{}
-\SeriesVolume{42}
-\ArticleNo{23}
+%\EventEditors{John Q. Open and Joan R. Acces}
+%\EventNoEds{2}
+%\EventLongTitle{42nd Conference on Very Important Topics (CVIT 2016)}
+%\EventShortTitle{CVIT 2016}
+%\EventAcronym{CVIT}
+%\EventYear{2016}
+%\EventDate{December 24--27, 2016}
+%\EventLocation{Little Whinging, United Kingdom}
+%\EventLogo{}
+%\SeriesVolume{42}
+%\ArticleNo{23}
 % Editor-only macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -46,298 +47,316 @@
 \DeclareMathOperator{\exponential}{exponential}
 \DeclareMathOperator{\binomial}{binomial}
 
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\etal}{\emph{et al}}
+
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
 We give a simple proof of the following statement: If one puts independent
-uniform $[0,1]$ edge weights on the edges of a $d$-cube, then the expected
-length of the lightest path from $(0,\ldots,0)$ to $(1,\ldots,1)$ is
-$O(1)$. This proof generalizes to the $d$-dimensional $k\times\cdots\times
-k$ grid for any any $k$ and $d$ and to any edge-weight distribution that
-has positive density at zero.
+exponential mean 1 edge weights on the edges of a $d$-cube, then the
+expected weight of the lightest path from $(0,\ldots,0)$ to $(1,\ldots,1)$
+is $O(1)$. 
 \end{abstract}
 
 \section{Introduction}
 
 The $d$-cube $Q_d$ is the graph with vertex set $V(Q_d)=\{0,1\}^d$
 and whose edge set $E(Q_d)$ contains the edge $uv$ if and only if the
-Hamming distance between $u$ and $v$ is exactly 1.
-Assign an independent $\exponential(1)$ \emph{edge weight} to each
-edge of $Q_d$.  These weights define a lightest path metric between the
-vertices of $Q_d$, where $w(u,v)$ denotes the weight of the lightest
-path from vertex $u$ to vertex $w$.  What is the expected weight
-$\E[w(\mathbf{0},\mathbf{1})]$? of the lightest path from
-$\mathbf{0}=(0,\ldots,0)$ to $\mathbf{1}=(1,\ldots,1)$?
+Hamming distance between $u$ and $v$ is exactly 1.  Assign an independent
+$\exponential(1)$ \emph{edge weight} to each edge of $Q_d$.  These weights
+define a lightest path metric between the vertices of $Q_d$, where
+$w(u,v)$ denotes the weight of the lightest path from vertex $u$ to vertex
+$w$.  What is the expected weight $\E[w(\mathbf{0},\mathbf{1})]$ of the
+lightest path from $\mathbf{0}=(0,\ldots,0)$ to $\mathbf{1}=(1,\ldots,1)$?
 
 In this note, we offer a simple proof that $\E[w(\mathbf{0},\mathbf{1})]
 \in O(1)$;  although the number of edges in any path from $\mathbf{0}$
-to $\mathbf{1}$ is $d$, the expected weight of the lightest path does not
-increase with $d$.  This result is not new.  Indeed, this type of question
-is central in the study of first-passage percolation \cite{X}. Fill and
-Pemantle \cite{fill.pemantle:percolation}, first proved this result in
-1993 (as well as stronger, more general results).  The last word on this
-problem is due to Martinsson \cite{martinsson:unoriented}, who shows 
-that $w(\mathbf{0},\mathbf{1})$
-converges in probability to $\ln(1+\sqrt{2})\approx 0.881$ as
-$d\rightarrow\infty$.  
+to $\mathbf{1}$ is at least $d$, the expected weight of the lightest path
+does not increase with $d$.  This result is not new.  Indeed, this type of
+question is central in the study of \emph{first-passage percolation} as
+introduced by Hammersley and Welsh in 1965 \cite{hammersley.welsh:first}
+and recently surveyed by Auffinger \etal\ \cite{auffinger.damron.ea:50}.
+
+The question we consider here was first asked by Aldous
+\cite[Section~G7]{aldous:probability} and first answered by Fill and
+Pemantle \cite{fill.pemantle:percolation} who showed that the
+weight of the lightest monotone path from $\zero$ to $\one$ converges
+in probability to $1$ as $d\rightarrow\infty$.  The most recent result
+on this problem is due to Martinsson \cite{martinsson:unoriented},
+who shows that $w(\mathbf{0},\mathbf{1})$ converges in probability to
+$\ln(1+\sqrt{2})\approx 0.881$ as $d\rightarrow\infty$.  The difference
+between these two results is that Fill and Pemantle's paths are \emph{monotone}---they have exactly $d$ edges---while Martinsson's paths may have more than
+$d$ edges.
 
 The proof we present here is (arguably) simpler and more accessible to
 a computer science audience than either of the proofs discussed above.
-Our proof employs a natural greedy strategy that results in an algorithm for
-finding such a short path that runs in $O(d^4)$ time.  In distributed
+Our proof does not guarantee a monotone path; it produces paths using
+roughly $3d/2$ edges.  One nice feature of this new proof is that
+it employs a natural greedy strategy that results in an algorithm for
+finding an $O(1)$ weight path that runs in $O(d^4)$ time.  In distributed
 computing terms, this algorithm is 3-local, it can be implemented by an
 agent that only has information about edge weights in a neighbourhood
 of radius 3 about the current vertex.
 
+\section{Review of Probability Concepts}
 
-\section{Preliminaries and A Simple Lemma}
-
-Recall that an $\exponential(\lambda)$ random variable $X$ has a distribution defined by
+Recall that an $\exponential(\lambda)$ random variable $X$ has a
+distribution defined by
 \[
    \Pr\{X > x\} = e^{-\lambda x} \enspace,\enspace x \ge 0 \enspace ,
 \]
 and has expected value
 \[
-   \E[X] = \int_0^\infty \Pr\{X>x\}\,dx = \int_0^\infty e^{-\lambda x} = 1/\lambda
+   \E[X] = \int_0^\infty \Pr\{X>x\}\,dx = \int_0^\infty e^{-\lambda x}\,dx = 1/\lambda
 \]
-If $X_1,\ldots,X_k$ are independent $\exponential(1)$ random variables, then their minimum is an $\exponential(k)$ random variable.
+If $X_1,\ldots,X_k$ are independent $\exponential(1)$ random variables,
+then their minimum is an $\exponential(k)$ random variable.
 \[
    \Pr\{\min\{X_1,\ldots X_k\} > x\} = \Pr\{\text{$X_1>x$, $X_2>x$,\ldots, and $X_k>x$}\} = \left(e^{-x}\right)^k = e^{-kx} \enspace .
 \]
+At one point, we will make use of a simple Chernoff bound for binomial
+random variables. If $B$ is a binomial random variable with expected
+value $\E[B]$, then
+\begin{equation}\label{eq:chernoff}
+   \Pr\{B < \E[B]/2\} \le e^{-\E[B]/8} \enspace .
+\end{equation}
 
-We will make use of the following lemma, which studies first-passage percolation in special kinds of trees of height three.
+\section{Some Intuition}
+\label{sec:intuition}
+
+Before continuing, we first describe a na\"{\i}ve greedy algorithm that
+does not quite work.  Suppose that, to route from $\zero$ to $\one$ we
+employ the strategy of repeatedly taking the lightest edge that
+takes us closer to $\one$.  At the zeroth step, there are $d$ edges to
+choose from, so the lightest one will have a weight that is the minimum of
+$d$ $\exponential(1)$ random variables, i.e., it is an $\exponential(d)$
+random variable and its expected value is $1/d$.  At the first step,
+there are $d-1$ edges to choose from, so the expected weight of the edge
+we choose is $1/(d-1)$. In general, the expected weight of an edge we
+choose at the $i$th step is $1/(d-i)$.  Thus, the expected weight of
+the edges crossed by this greedy algorithm is
+\[
+   \sum_{i=0}^{d-1} 1/(d-i) = \sum_{i=1}^d 1/i \le \ln d + 1 \enspace . 
+\]
+This is not quite the $O(1)$ bound we are hoping for, but it is significantly better than the obvious $O(d)$ bound.
+
+The problem with this greedy algorithm is that it works well for the
+first $d/2$ steps, but the cost of each step increases as it gets closer
+to $\one$, eventually yielding the $d$th harmonic number.  Our solution
+to this problem is to employ a \emph{foxtrot} in the second $d/2$ steps,
+in which we repeatedly take a step away from $\one$ followed by two steps
+toward $\one$.  In the $i$th stage, this allows us to choose from among
+$i(d-i)^2$ different paths of length three instead of being restricted
+$d-i$ paths of length 1. Next, we prove a lemma that allows us to analyze these foxtrot steps.
+
+
+\section{Trees of Height 3}
 
 \begin{lemma}\label{lem:abc}
 Let $a>b\ge c\ge 1$ be integers and let $T$ be a rooted tree of height
 three of whose root has $a$ children, each of which has $b$ children,
 each of which has $c$ children.  Assign an $\exponential(1)$ edge weight
-to each edge of $T$.  Then there exists a constants $\alpha,\beta>0$ such that, for any $t>0$, with probability at least $1-e^{-\alpha t}$, $T$
-contains a root to leaf path of weight at most $\beta(t+2)/(abc)^{1/3}$
+to each edge of $T$ and let $\rho(T)$ denote the weight of the lightest
+root-to-leaf path in $T$.  Then
+\[
+    \Pr\{\rho(T) > t\} \le e^{-at/64} + e^{-bat^2/1024} + e^{-cbat^3/768} \enspace .
+\] 
 \end{lemma}
 
-\begin{proof}
-  First, consider the (easy) case in which $t/(abc)^{1/3}>\epsilon$
-  for some constant $\epsilon >0$. The tree $T$ contains $a$ independent
-  root-to-leaf paths, each of whose weight is the sum of three independent
-  $\exponential(1)$ random variables.  If one of paths has weight greater than
-  $\beta(t+2)/(abc)^{1/3}$, then one of its three edges has weight greater than 
-  $(\beta/3)(t+2)/(abc)^{1/3}$.  The probability that happens for one particular path is at most
-  \[
-      3e^{-(\beta/3)(t+2)/(abc)^{1/3}}   
-  \]
-  and the probabliity that it happens for all paths is at most
-  %\[
-  %    (3e^{-(\beta/3)(t+2)/(abc)^{1/3})^a
-  %    \le 3^a e^{-(\beta/3)(t+2)}
-  %\]
+Our only use for Lemma~\ref{lem:abc} is to upper bound the expected
+value of $\rho(T)$.  We do this now, before proving
+Lemma~\ref{lem:abc}.
 
-  Fix some (small) positive values $w_1$, $w_2$, and $w_3$ to be specified
-  shortly.  We say that a node $v$ in $T$ is \emph{good} if $v$ is the
-  root of $T$, or if the path from the root of $T$ to $v$ consists of an
-  edge of weight at most $w_1$, possibly followed by an edge of weight
-  at most $w_2$, possibly followed by an edge of weight at most $w_3$.
-
-  In what follows, it helps to think of good nodes as branching
-  out from the root: Each of the root's $a$ children has probability
-  $1-e^{-w_1}\approx w_1$ of being good.  Each of the root's good children
-  has $b$ children which each have probability $1-e^{-w_2}\approx w_2$
-  of being good. Each of the root's good grandchildren have $c$ children,
-  each of which has probability $1-e^{-w_3}\approx w_3$ of being good.
-  We take $w_1=\Theta(t/(abc)^{1/3})$ and $w_2,w_3=\Theta(1/(abc)^{1/3})$. In this way, the number, $N_1$, of good children is concentrated around
-  \[  \mu_1 = \Theta(aw_1) = \Theta(at/(abc)^{1/3}) \enspace , \]
-  the number, $N_2$ of good grandchildren is concentrated around 
-  \[  \mu_2 = \Theta(w_2b\mu_1) = \Theta(bat/(abc)^{2/3}) \enspace , \]
-  and the number $N_3$ of good grandchildren is concentrated around
-  \[  \mu_3 = \Theta(w_2c\mu_2=\Theta(cbat/(abc)^{3/3}) = \Theta(t) \enspace . \]
-
-  We now make this precise using the machinery of Chernoff's bounds.
-  Observe that, for $i\in\{1,2,3\}$ and conditioned on
-  $N_{i-1}$, $N_i$ is a binomial random variable. Specifically
-  \[
-     N_1 \sim \binomial(a,1-e^{-w_1}) \enspace 
-     N_2 \sim \binomial(bN_1,1-e^{-w_2}) \enspace
-     N_3 \sim \binomial(cN_2,1-e^{-w_3})
-  \]
-
-  Set 
-  \[  
-        w_1=\frac{8t}{3(abc)^{1/3}} \enspace .
-  \]
-  Then $N_1$ is a $\binomial(a,1-e^{-w_1})$ random variable with expected value
-  \[
-     \mu_1 = a(1-e^{-w_1}) \ge 3aw_1/4 = 2at/(abc)^{1/3} \enspace ,
-  \]
-  provided that $w_1 \le 1/2$.
-  By Chernoff's bounds, we have
-  \[
-      \Pr\{N_1 < \mu_1/2\} \le e^{-\mu_1/8}\le e^{-\frac{at}{4(abc)^{1/3}}} \le e^{-t/4} \enspace .
-  \]
-  Now set
-   \[  
-        w_2=\frac{8}{3(abc)^{1/3}} \enspace .
-  \]
-  Then, conditioned on $N_1$, $N_2$ is $\binomial(bN_1, p_2)$ random
-  variable with $p_2=1-e^{-w_2}\ge 3w_2/4$, provided that $w_2<1/2$.
-  Conditioning on $N_1>\mu_1/2$, the (conditional) expectation of $\mu_2$
-  of $N_2$ is
-  \[
-     \mu_2 = \E[N_2\mid N_1\ge \mu_1/2] 
-      \ge (3w_2/4)b\mu_1/2 
-      \ge \frac{3w_2}{4}\cdot\frac{abt}{(abc)^{1/3}}
-       = 2abt/(abc)^{2/3} \enspace .
-  \]   
-  Again, by Chernoff's bounds, we have
-  \[
-     \Pr\{N_2 < \mu_2/2\mid N_1 \ge \mu_1/2\} 
-       \le e^{-\mu_2/8} \le e^{-\frac{abt}{4(abc)^{1/3}}} \le e^{-t/4} \enspace .
-  \]
-  For the last step, we get to take a small shortcut.  Set
-  \[
-     w_3=\frac{1}{4(abc)^{1/3}}
-  \]
-  Then
-  \[
-    \Pr\{N_3 = 0\mid N_2\ge \mu_2/2\} 
-        \le (e^{-w_3})^{c\mu_2/2}
-        \le e^{\frac{1}{4(abc)^{1/3}}\cdot\frac{abt}{(abc)^{2/3}}} = e^{-t/4} \enspace .
-  \]
-  To summarize, we have
-  \begin{align*}
-    \Pr\{N_3 = 0\}
-      & \le \Pr\{N_3=0\mid N_2 \ge \mu_2/2\} \\
-      & \quad {}+\Pr\{N_2<\mu_2/2\mid N_1 \ge \mu_1/2\} \\
-       & \quad {}+\Pr\{N_1<\mu_1/2\} \\
-       & \le 3e^{-t/4}
-  \end{align*}
-  On the other hand, if $N_3\ge 1$, then there is a root-to-leaf path in $T$ of weight at most 
-  \[
-     w_1+w_2+w_3 = \frac{8t+8+3/4}{3(abc)^{1/3}} \le \frac{8}{3}(t+2)/(abc)^{1/3}\enspace . \qedhere
-  \]
-\end{proof}
-
-
-From Lemma~\ref{lem:abc} we can easily obtain an upper bound on the expected length of the shortest root-to-leaf path in $T$.
-
-\begin{corollary}
-  Let $T$ be defined as in Lemma~\ref{lem:abc}. Then the expected length of the lightest root-to-leaf path in $T$ is $O(1/(abc)^{1/3})$.
+\begin{corollary}\label{cor:expectation}
+  Let $a$, $b$, $c$, $T$, and $\rho(T)$ be defined as in Lemma~\ref{lem:abc}.  Then $\E[\rho(T)] \le C/(abc)^{1/3}$, for
+  $C=64 + 16\sqrt{\pi} + 16(1/12)^{2/3}\Gamma(1/3)$.
 \end{corollary}
 
 \begin{proof}
-  Let $X$ denote the length of the lightest root-to-leaf path in $T$ and recall that for any continuous non-negative random variable $X$, $\E[X]=\int_0^\infty \Pr\{X>x\}$.  Therefore,
- \begin{align*}
-  \E[X] & = \int_0^\infty \Pr\{X>x\}\,dx \\
-      & \le \int_0^\infty e^{-\frac{\alpha x(abc)^{1/3}}{\beta}+2} & \text{(setting $x=\beta(t+2)/(abc)^{1/3}$ and using Lemma~\ref{lem:abc})} \\
-      & = \frac{\beta e^2}{\alpha(abc)^{1/3}} \\
-      & = O(1/(abc)^{1/3}) \enspace .&  \qedhere
- \end{align*}
+   Recall that, for any non-negative random variable $X$, $\E[X]=\int_0^{\infty} \Pr\{X>x\}\,dx$.  Therefore,
+  \begin{align*}
+    \E[\rho(T)] & = \int_0^{\infty} \Pr\{\rho(T)>t\}\,dt \\
+                & \le \int_0^{\infty}\left( e^{-at/64} + e^{-bat^2/1024} + e^{-cbat^3/768}\right)\,dt \\
+                & = \frac{64}{a} + \frac{16\sqrt{\pi}}{\sqrt{ab}} + \frac{16(1/12)^{2/3}\Gamma(1/3)}{\sqrt[3]{abc}} \\
+                & \le \frac{64 + 16\sqrt{\pi} + 16(1/12)^{2/3}\Gamma(1/3)}{\sqrt[3]{abc}}
+  \end{align*}
+  where the last inequality uses the assumption that $a\ge b\ge c$.
 \end{proof}
 
 
-\section{The Hypercube}
+\begin{proof}[Proof of Lemma~\ref{lem:abc}]
+  For large values of $t$, the proof is simple. In particular, if $t\ge 6\ln 3$,
+  then we observe that $T$ contains $a$ edge-disjoint root-to-leaf paths.
+  For one of these paths to have weight greater than $t$, at least one of
+  its three edges must have weight greater than $t/3$.  The probability
+  that this occurs (for a single path) is at most $3e^{-t/3}$. Since
+  the paths are edge-disjoint, their weights are independent, so the
+  probability that it occurs for all $a$ paths is therefore at most
+  \begin{align*}
+     (3e^{-t/3})^a = (e^{\ln 3-t/3})^a = (e^{(\ln 3/t-1/3)t})^a \le (e^{-t/6})^a = e^{-at/6}\enspace ,
+  \end{align*}
+  where the inequality uses the assumption that $t\ge 6\ln 3$.
 
-\section{The $(d,k)$-Grid}
+  We now move on to the interesting case, where
+  $0\le t < 6\ln 3$. 
+  Imagine removing every edge of $T$ having weight greater than $t/3$
+  to obtain a forest $F$ and let $T'$ be the tree in $F$ that contains
+  the root of $T$.  For each $i\in\{0,1,\ldots,3\}$, let $N_i$ denote
+  the number of nodes of $T'$ having depth $i$.
+  Observe that, if $N_3\ge 1$, then there is a root-to-leaf path in $T$
+  of weight at most $t$.  Therefore the rest of the proof is devoted to
+  upper bounding $\Pr\{N_3=0\}$.
 
-
-\bibliography{foxtrot}
-\end{document}
-
-\newpage
-
-
-Let 
-Please comply with the following instructions when preparing your article for a LIPIcs proceedings volume. 
-\begin{itemize}
-\item Use pdflatex and an up-to-date LaTeX system.
-\item Use further LaTeX packages only if required. Avoid usage of packages like \verb+enumitem+, \verb+enumerate+, \verb+cleverref+. Keep it simple, i.e. use as few additional packages as possible.
-\item Add custom made macros carefully and only those which are needed in the article (i.e., do not simply add your convolute of macros collected over the years).
-\item Do not use a different main font. For example, the usage of the \verb+times+-package is forbidden.
-\item Provide full author names (especially with regard to the first name) in the \verb+\author+ macro and in the \verb+\Copyright+ macro.
-\item Fill out the \verb+\subjclass+ and \verb+\keywords+ macros. For the \verb+\subjclass+, please refer to the ACM classification at \url{http://www.acm.org/about/class/ccs98-html}.
-\item Take care of suitable linebreaks and pagebreaks. No overfull \verb+\hboxes+ should occur in the warnings log.
-\item Provide suitable graphics of at least 300dpi (preferrably in pdf format).
-\item Use the provided sectioning macros: \verb+\section+, \verb+\subsection+, \verb+\subsection*+, \verb+\paragraph+, \verb+\subparagraph*+, ... ``Self-made'' sectioning commands (for example, \verb+\noindent{\bf My+ \verb+subparagraph.}+ will be removed and replaced by standard LIPIcs style sectioning commands.
-\item Do not alter the spacing of the  \verb+lipics-v2016.cls+ style file. Such modifications will be removed.
-\item Do not use conditional structures to include/exclude content. Instead, please provide only the content that should be published -- in one file -- and nothing else.
-\item Remove all comments, especially avoid commenting large text blocks and using \verb+\iffalse+ $\ldots$ \verb+\fi+ constructions.
-\item Keep the standard style (\verb+plainurl+) for the bibliography as provided by the\linebreak \verb+lipics-v2016.cls+ style file.
-\item Use BibTex and provide exactly one BibTex file for your article. The BibTex file should contain only entries that are referenced in the article. Please make sure that there are no errors and warnings with the referenced BibTex entries.
-\item Use a spellchecker to get rid of typos.
-\item A manual for the LIPIcs style is available at \url{http://drops.dagstuhl.de/styles/lipics-v2016/lipics-v2016-authors/lipics-v2016-manual.pdf}.
-\end{itemize}
-
-
-\section{Lorem ipsum dolor sit amet}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit \cite{DBLP:journals/cacm/Knuth74}. Praesent convallis orci arcu, eu mollis dolor. Aliquam eleifend suscipit lacinia. Maecenas quam mi, porta ut lacinia sed, convallis ac dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Donec eget odio et magna ullamcorper vehicula ut vitae libero. Maecenas lectus nulla, auctor nec varius ac, ultricies et turpis. Pellentesque id ante erat. In hac habitasse platea dictumst. Curabitur a scelerisque odio. Pellentesque elit risus, posuere quis elementum at, pellentesque ut diam. Quisque aliquam libero id mi imperdiet quis convallis turpis eleifend. 
-
-\begin{lemma}[Lorem ipsum]
-\label{lemma:lorem}
-Vestibulum sodales dolor et dui cursus iaculis. Nullam ullamcorper purus vel turpis lobortis eu tempus lorem semper. Proin facilisis gravida rutrum. Etiam sed sollicitudin lorem. Proin pellentesque risus at elit hendrerit pharetra. Integer at turpis varius libero rhoncus fermentum vitae vitae metus.
-\end{lemma}
-
-\begin{proof}
-Cras purus lorem, pulvinar et fermentum sagittis, suscipit quis magna.
+  Observe that $N_1$ is a $\binomial(a,1-e^{-t/3})$ random variable.
+  The probability $1-e^{-t/3}$ is a bit unwieldy so we observe that,
+  in the range $0\le t < 6\ln 3$, $1-e^{-t/3}\ge t/8$.  Therefore, we
+  can lower bound the expected value
+  \[
+     \E[N_1] = a(1-e^{-t/3}) \ge at/8 \enspace .
+  \]
+  Since $N_1$ is binomial, 
+  by \eqref{eq:chernoff},
+  \[
+     \Pr\{ N_1 < at/16 \} \le e^{-at/64} \enspace .
+  \]
+  Now, conditioned on $N_1$, $N_2$ is a $\binomial(bN_1, 1-e^{-t/3})$ random variable and
+  \[
+      \E[N_2\mid N_1\ge at/16] \ge bat(1-e^{-t/3})/16 \ge bat^2/128 \enspace .
+  \]
+  Again, \eqref{eq:chernoff} yields
+  \[
+      \Pr\{N_2 < bat^2/256\mid N_1 \ge at/16\} \le e^{-bat^2/1024} \enspace .
+  \]
+  Now, conditioned on $N_2$, $N_3$ is a $\binomial(cN_2,1-e^{-t/3})$
+  random variable but for this last step we don't need Chernoff's help:
+  \[
+      \Pr\{N_3 = 0 \mid N_2\ge bat^2/256\} \le (e^{-t/3})^{cbat^2/256}
+          = e^{-cbat^3/768} \enspace .
+  \]
+  Summarizing,
+  \begin{align*}
+     \Pr\{\rho(T) > t\} 
+                    & \le \Pr\{N_3 = 0\} \\
+                    & \le \Pr\{N_3 = 0\mid N_2 \ge \E[N_2/2]\} \\
+                    &\quad{}+ \Pr\{N_2 < \E[N_2/2] \mid N_1 \ge \E[N_1/2]\} \\
+                    &\quad{}+ \Pr\{N_1 < \E[N_1/2]\} \\
+        & \le e^{-at/64} + e^{-bat^2/1024} + e^{-bat^3/768} \enspace .  \qedhere
+  \end{align*}
 \end{proof}
 
-\begin{theorem}[Curabitur pulvinar, \cite{DBLP:books/mk/GrayR93}]
-\label{theorem:curabitur}
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+
+\section{The Proof}
+
+
+\begin{theorem}
+  Let $Q_d$ be the $d$-cube equipped with independent $\exponential(1)$
+  edge weights.  Then there is a path from $\zero$ to $\one$ whose
+  expected weight is $O(1)$.
 \end{theorem}
 
-\subsection{Curabitur dictum felis id sapien}
+\begin{proof}
+  For each $i\in\{0,\ldots,d\}$, let $L_i$ denote set of vertices of $Q_d$
+  whose distance from $\zero$ is exactly $i$, so that $\zero\in L_0$ and
+  $\one\in L_d$.  We use a greedy strategy to find a path from $\zero$
+  to $\one$.  To get from a vertex $u\in L_i$ to some vertex in $L_{i+1}$
+  the strategey does one of the following two things:
+  \begin{enumerate}
+     \item If $i < d/2$, then the algorithm traverses the lightest edge
+     joining $u$ to some vertex in $L_{i+1}$.  The weight of this edge is
+     the minimum of $d-i$ independent $\exponential(1)$ random variables,
+     so the expected weight of this edge is at most $1/(d-i)\le 2/d$.
 
-Curabitur dictum felis id sapien mollis ut venenatis tortor feugiat. Curabitur sed velit diam. Integer aliquam, nunc ac egestas lacinia, nibh est vehicula nibh, ac auctor velit tellus non arcu. Vestibulum lacinia ipsum vitae nisi ultrices eget gravida turpis laoreet. Duis rutrum dapibus ornare. Nulla vehicula vulputate iaculis. Proin a consequat neque. Donec ut rutrum urna. Morbi scelerisque turpis sed elit sagittis eu scelerisque quam condimentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean nec faucibus leo. Cras ut nisl odio, non tincidunt lorem. Integer purus ligula, venenatis et convallis lacinia, scelerisque at erat. Fusce risus libero, convallis at fermentum in, dignissim sed sem. Ut dapibus orci vitae nisl viverra nec adipiscing tortor condimentum \cite{DBLP:journals/cacm/Dijkstra68a}. Donec non suscipit lorem. Nam sit amet enim vitae nisl accumsan pretium. 
+     \item If $i \ge d/2$, we consider the $i(d-i)^2$ paths $uxyz$ with
+     $x\in L_{i-1}$, $y\in L_i\setminus\{u\}$, and $z\in L_{i+1}$
+     and traverse the lightest such path.  This set of paths forms
+     a tree of height 3 in which the root has $i$ children and the
+     nodes at depth 1 and 2 each have $d-i$ children.  Therefore, by
+     Corollary~\ref{cor:expectation}, the expected weight of these three
+     edges is at most $Ci^{-1/3}(d-i)^{-2/3}$.
+  \end{enumerate}
+  Therefore, the expected weight of the entire path found by this
+  algorithm is at most
+  \begin{align*}
+    \mu & \le \sum_{i=0}^{\lfloor (d-1)/2\rfloor} 2/d 
+               + \sum_{i=\lceil d/2\rceil}^{d-1} Ci^{-1/3}(d-i)^{-2/3} \\
+        & \le 1 
+               + C\left(\sum_{i=\lceil d/2\rceil}^{d-1} i^{-1/3}(d-i)^{-2/3}\right) \\
+        & \le 1 
+               + C(d/2)^{-1/3}\left(\sum_{i=\lceil d/2\rceil}^{d-1} (d-i)^{-2/3}\right) \\
+        & = 1 
+               + C(d/2)^{-1/3}\left(\sum_{k=1}^{\lfloor d/2\rfloor}k^{-2/3}\right) \\
+        & \le 1
+               + C(d/2)^{-1/3}\left(1+\int_1^{d/2}x^{-2/3}\,dx\right) \\
+        & = 1
+               + C(d/2)^{-1/3}\left(3(d/2)^{1/3}-3\right) \\
+        & \le 1
+               + 3C \enspace . \qedhere
+  \end{align*}
+\end{proof}
 
-\begin{lstlisting}[caption={Useless code},label=list:8-6,captionpos=t,float,abovecaptionskip=-\medskipamount]
-for i:=maxint to 0 do 
-begin 
-    j:=square(root(i));
-end;
-\end{lstlisting}
+\section{Discussion}
 
-\subsection{Proin ac fermentum augue}
+Our poof works for any continuous edge weight distribution that has
+density 1 at zero. Besides exponential distributions, another notable
+example is the uniform distribution over the interval $[0,1]$.  A careful
+rereading of our proofs will reveal that the only property required by
+the distribution is that the minimum of $k$ independent random samples
+from the distribution has expected value $O(1/k)$. This property is what
+allows the first $d/2$ steps of the greedy algorithm to produce a path
+of length at most $1$ and this property is sufficient to push through
+the proof of (suitably modified versions of) Lemma~\ref{lem:abc}.
 
-Proin ac fermentum augue. Nullam bibendum enim sollicitudin tellus egestas lacinia euismod orci mollis. Nulla facilisi. Vivamus volutpat venenatis sapien, vitae feugiat arcu fringilla ac. Mauris sapien tortor, sagittis eget auctor at, vulputate pharetra magna. Sed congue, dui nec vulputate convallis, sem nunc adipiscing dui, vel venenatis mauris sem in dui. Praesent a pretium quam. Mauris non mauris sit amet eros rutrum aliquam id ut sapien. Nulla aliquet fringilla sagittis. Pellentesque eu metus posuere nunc tincidunt dignissim in tempor dolor. Nulla cursus aliquet enim. Cras sapien risus, accumsan eu cursus ut, commodo vel velit. Praesent aliquet consectetur ligula, vitae iaculis ligula interdum vel. Integer faucibus faucibus felis. 
+The weight of the path found in our proof is the sum of $d$ random
+variables. The first $d/2$ of these are independent $\exponential(1)$. The
+second $d/2$ can be split into two subsets (the odd steps and the even
+steps) that are each independent.  Using standard methods for deriving
+concentration inqualities along with the fact that Lemma~\ref{lem:abc}
+gives an exponential tail bound on $\rho(T)$, it is possible to show
+that, for any $\delta >0$, $\Pr\{\mu\ge (1+\delta)(1+3C)\}\rightarrow 0$
+as $d\rightarrow\infty$.  Unfortunately, the rate of this convergence is
+not quite enough to prove that (for example) there is a path of weight
+$O(1)$ from $\zero$ to every vertex of $Q_d$.
 
-\begin{itemize}
-\item Ut vitae diam augue. 
-\item Integer lacus ante, pellentesque sed sollicitudin et, pulvinar adipiscing sem. 
-\item Maecenas facilisis, leo quis tincidunt egestas, magna ipsum condimentum orci, vitae facilisis nibh turpis et elit. 
-\end{itemize}
+A conjecture of Aldous \cite[Conjecture~G7.1]{aldous:probability}
+was the original motivation for the work of Fill and Pemantle.  In his
+discussion of this conjecture, Aldous describes the na\"{\i}ve greedy
+algorithm from Section~\ref{sec:intuition} and shows that it produces a
+path whose expected weight is the $d$th harmonic number.  In their review
+of previous work, Fill and Pemantle \cite{fill.pemantle:percolation}
+point out that similar results on percolation were proven for complete
+binary trees \cite{pemantle:phase}.  24 years later, our proof shows
+that the result for hypercubes is a consequence of the na\"{\i}ve greedy
+algorithm and a result for trees of height three.
 
-\section{Pellentesque quis tortor}
+The proof of Fill and Pemantle \cite{fill.pemantle:percolation}
+and an unpublished proof of Bollob\'as \etal\
+\cite{balister.bollobas.ea:first-passage} both work by a careful analysis
+of the $d!$ monotone paths from $\zero$ to $\one$, and the ways in which
+pairs of these paths can overlap.  Fill and Pemantle require this because
+they use (a variant of) the second moment method, while Bollob\'as \etal\
+use a lemma due to Janson that also has conditions on the interactions
+between pairs of objects. Our proof sidesteps all of this.
 
-Nec urna malesuada sollicitudin. Nulla facilisi. Vivamus aliquam tempus ligula eget ornare. Praesent eget magna ut turpis mattis cursus. Aliquam vel condimentum orci. Nunc congue, libero in gravida convallis \cite{DBLP:conf/focs/HopcroftPV75}, orci nibh sodales quam, id egestas felis mi nec nisi. Suspendisse tincidunt, est ac vestibulum posuere, justo odio bibendum urna, rutrum bibendum dolor sem nec tellus. 
+Martinsson's proof \cite{martinsson:unoriented} works by relating this
+problem to a so-called \emph{branching translation process} and then
+using a variety of advanced probabilistic tools to study this process.
+This branching translation process was used by Fill and Pemantle's
+original work to provide a lower bound on $w(\zero,\one)$.
 
-\begin{lemma} [Quisque blandit tempus nunc]
-Sed interdum nisl pretium non. Mauris sodales consequat risus vel consectetur. Aliquam erat volutpat. Nunc sed sapien ligula. Proin faucibus sapien luctus nisl feugiat convallis faucibus elit cursus. Nunc vestibulum nunc ac massa pretium pharetra. Nulla facilisis turpis id augue venenatis blandit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-\end{lemma}
+Finally, we point out that the first-passage percolation time in a graph
+$G$ with i.i.d.\ exponential edge weights is closely related to the height
+of the lightest path tree $T$ of $G$. Devroye \etal\ \cite{devroye.dujmovic.ea:notes}
+describe a relationship between first-passage percolation time, the
+number of simple paths in $G$ and the height of $T$ and use this to
+derive tight bounds on the height of $T$ for many classes of graphs.
 
-Fusce eu leo nisi. Cras eget orci neque, eleifend dapibus felis. Duis et leo dui. Nam vulputate, velit et laoreet porttitor, quam arcu facilisis dui, sed malesuada risus massa sit amet neque.
-
-
-\subparagraph*{Acknowledgements.}
-
-I want to thank \dots
-
-\appendix
-\section{Morbi eros magna}
-
-Morbi eros magna, vestibulum non posuere non, porta eu quam. Maecenas vitae orci risus, eget imperdiet mauris. Donec massa mauris, pellentesque vel lobortis eu, molestie ac turpis. Sed condimentum convallis dolor, a dignissim est ultrices eu. Donec consectetur volutpat eros, et ornare dui ultricies id. Vivamus eu augue eget dolor euismod ultrices et sit amet nisi. Vivamus malesuada leo ac leo ullamcorper tempor. Donec justo mi, tempor vitae aliquet non, faucibus eu lacus. Donec dictum gravida neque, non porta turpis imperdiet eget. Curabitur quis euismod ligula. 
-
-
-%%
-%% Bibliography
-%%
-
-%% Either use bibtex (recommended), 
-
-\bibliography{lipics-v2016-sample-article}
-
-%% .. or use the thebibliography environment explicitely
-
-
+\bibliography{foxtrot}
 
 \end{document}
+
+
+
