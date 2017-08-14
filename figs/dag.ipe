@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70206" creator="Ipe 7.2.7">
-<info created="D:20170811085344" modified="D:20170811091022"/>
+<info created="D:20170811085344" modified="D:20170811110354"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -267,7 +267,67 @@ h
 <layer name="dag"/>
 <view layers="tree" active="dag"/>
 <view layers="dag" active="tree"/>
-<use layer="dag" matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="96 656" size="normal" stroke="black"/>
+<use layer="dag" name="mark/disk(sx)" pos="216 568" size="normal" stroke="brew1"/>
+<use name="mark/disk(sx)" pos="264 568" size="normal" stroke="brew3"/>
+<path stroke="brew1" pen="heavier" arrow="normal/tiny">
+216 592 m
+216 568 l
+</path>
+<path stroke="brew1" pen="heavier" arrow="normal/tiny">
+248 592 m
+216 568 l
+</path>
+<path stroke="brew1" pen="heavier" arrow="normal/tiny">
+280 592 m
+216 568 l
+</path>
+<path stroke="brew3" pen="heavier" arrow="normal/tiny">
+200 592 m
+264 568 l
+</path>
+<path stroke="brew3" pen="heavier" arrow="normal/tiny">
+232 592 m
+264 568 l
+</path>
+<path stroke="brew3" pen="heavier" arrow="normal/tiny">
+248 592 m
+264 568 l
+</path>
+<path stroke="brew3" pen="heavier" arrow="normal/tiny">
+264 592 m
+264 568 l
+</path>
+<path stroke="brew3" pen="heavier" arrow="normal/tiny">
+280 592 m
+264 568 l
+</path>
+<use matrix="1 0 0 1 96 0" name="mark/disk(sx)" pos="216 568" size="normal" stroke="brew4"/>
+<use matrix="1 0 0 1 96 0" name="mark/disk(sx)" pos="264 568" size="normal" stroke="brew7"/>
+<path matrix="1 0 0 1 96 0" stroke="brew4" pen="heavier" arrow="normal/tiny">
+216 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew4" pen="heavier" arrow="normal/tiny">
+248 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew4" pen="heavier" arrow="normal/tiny">
+280 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew7" pen="heavier" arrow="normal/tiny">
+216 592 m
+264 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew7" pen="heavier" arrow="normal/tiny">
+248 592 m
+264 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew7" pen="heavier" arrow="normal/tiny">
+280 592 m
+264 568 l
+</path>
+<use matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="96 656" size="normal" stroke="black"/>
 <path matrix="1 0 0 1.5 120 -368" stroke="black" arrow="normal/tiny">
 96 656 m
 80 640 l
@@ -310,56 +370,6 @@ h
 168 672 m
 240 656 l
 </path>
-<use name="mark/disk(sx)" pos="216 568" size="normal" stroke="brew1"/>
-<use name="mark/disk(sx)" pos="264 568" size="normal" stroke="brew3"/>
-<path stroke="brew1" arrow="normal/tiny">
-200 592 m
-216 568 l
-</path>
-<path stroke="brew1" arrow="normal/tiny">
-216 592 m
-216 568 l
-</path>
-<path stroke="brew1" arrow="normal/tiny">
-232 592 m
-216 568 l
-</path>
-<path stroke="brew1" arrow="normal/tiny">
-248 592 m
-216 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-264 592 m
-216 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-280 592 m
-216 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-200 592 m
-264 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-216 592 m
-264 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-232 592 m
-264 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-248 592 m
-264 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-264 592 m
-264 568 l
-</path>
-<path stroke="brew3" arrow="normal/tiny">
-280 592 m
-264 568 l
-</path>
 <use matrix="1 0 0 1.5 216 -368" name="mark/disk(sx)" pos="96 656" size="normal" stroke="black"/>
 <path matrix="1 0 0 1.5 216 -368" stroke="black" arrow="normal/tiny">
 96 656 m
@@ -386,56 +396,6 @@ h
 96 656 m
 112 640 l
 </path>
-<use matrix="1 0 0 1 96 0" name="mark/disk(sx)" pos="216 568" size="normal" stroke="brew4"/>
-<use matrix="1 0 0 1 96 0" name="mark/disk(sx)" pos="264 568" size="normal" stroke="brew7"/>
-<path matrix="1 0 0 1 96 0" stroke="brew4" arrow="normal/tiny">
-200 592 m
-216 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew4" arrow="normal/tiny">
-216 592 m
-216 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew4" arrow="normal/tiny">
-232 592 m
-216 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew4" arrow="normal/tiny">
-248 592 m
-216 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew4" arrow="normal/tiny">
-264 592 m
-216 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew4" arrow="normal/tiny">
-280 592 m
-216 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew7" arrow="normal/tiny">
-200 592 m
-264 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew7" arrow="normal/tiny">
-216 592 m
-264 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew7" arrow="normal/tiny">
-232 592 m
-264 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew7" arrow="normal/tiny">
-248 592 m
-264 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew7" arrow="normal/tiny">
-264 592 m
-264 568 l
-</path>
-<path matrix="1 0 0 1 96 0" stroke="brew7" arrow="normal/tiny">
-280 592 m
-264 568 l
-</path>
 <use layer="tree" matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="96 656" size="normal" stroke="black"/>
 <path matrix="1 0 0 1.5 120 -368" stroke="black" arrow="normal/tiny">
 96 656 m
@@ -449,27 +409,27 @@ h
 96 656 m
 112 640 l
 </path>
-<path matrix="1 0 0 1.5 120 -368" stroke="brew1" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 120 -368" stroke="brew1" pen="heavier" arrow="normal/tiny">
 80 640 m
 76 624 l
 </path>
-<path matrix="1 0 0 1.5 120 -368" stroke="brew3" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 120 -368" stroke="brew3" pen="heavier" arrow="normal/tiny">
 80 640 m
 84 624 l
 </path>
-<path matrix="1 0 0 1.5 120 -368" stroke="brew1" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 120 -368" stroke="brew1" pen="heavier" arrow="normal/tiny">
 96 640 m
 92 624 l
 </path>
-<path matrix="1 0 0 1.5 120 -368" stroke="brew3" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 120 -368" stroke="brew3" pen="heavier" arrow="normal/tiny">
 96 640 m
 100 624 l
 </path>
-<path matrix="1 0 0 1.5 120 -368" stroke="brew1" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 120 -368" stroke="brew1" pen="heavier" arrow="normal/tiny">
 112 640 m
 108 624 l
 </path>
-<path matrix="1 0 0 1.5 120 -368" stroke="brew3" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 120 -368" stroke="brew3" pen="heavier" arrow="normal/tiny">
 112 640 m
 116 624 l
 </path>
@@ -486,27 +446,27 @@ h
 96 656 m
 112 640 l
 </path>
-<path matrix="1 0 0 1.5 168 -368" stroke="brew1" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 168 -368" stroke="brew1" pen="heavier" arrow="normal/tiny">
 80 640 m
 76 624 l
 </path>
-<path matrix="1 0 0 1.5 168 -368" stroke="brew3" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 168 -368" stroke="brew3" pen="heavier" arrow="normal/tiny">
 80 640 m
 84 624 l
 </path>
-<path matrix="1 0 0 1.5 168 -368" stroke="brew1" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 168 -368" stroke="brew1" pen="heavier" arrow="normal/tiny">
 96 640 m
 92 624 l
 </path>
-<path matrix="1 0 0 1.5 168 -368" stroke="brew3" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 168 -368" stroke="brew3" pen="heavier" arrow="normal/tiny">
 96 640 m
 100 624 l
 </path>
-<path matrix="1 0 0 1.5 168 -368" stroke="brew1" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 168 -368" stroke="brew1" pen="heavier" arrow="normal/tiny">
 112 640 m
 108 624 l
 </path>
-<path matrix="1 0 0 1.5 168 -368" stroke="brew3" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 168 -368" stroke="brew3" pen="heavier" arrow="normal/tiny">
 112 640 m
 116 624 l
 </path>
@@ -523,27 +483,27 @@ h
 96 656 m
 112 640 l
 </path>
-<path matrix="1 0 0 1.5 216 -368" stroke="brew4" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 216 -368" stroke="brew4" pen="heavier" arrow="normal/tiny">
 80 640 m
 76 624 l
 </path>
-<path matrix="1 0 0 1.5 216 -368" stroke="brew7" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 216 -368" stroke="brew7" pen="heavier" arrow="normal/tiny">
 80 640 m
 84 624 l
 </path>
-<path matrix="1 0 0 1.5 216 -368" stroke="brew4" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 216 -368" stroke="brew4" pen="heavier" arrow="normal/tiny">
 96 640 m
 92 624 l
 </path>
-<path matrix="1 0 0 1.5 216 -368" stroke="brew7" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 216 -368" stroke="brew7" pen="heavier" arrow="normal/tiny">
 96 640 m
 100 624 l
 </path>
-<path matrix="1 0 0 1.5 216 -368" stroke="brew4" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 216 -368" stroke="brew4" pen="heavier" arrow="normal/tiny">
 112 640 m
 108 624 l
 </path>
-<path matrix="1 0 0 1.5 216 -368" stroke="brew7" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 216 -368" stroke="brew7" pen="heavier" arrow="normal/tiny">
 112 640 m
 116 624 l
 </path>
@@ -560,27 +520,27 @@ h
 96 656 m
 112 640 l
 </path>
-<path matrix="1 0 0 1.5 264 -368" stroke="brew4" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 264 -368" stroke="brew4" pen="heavier" arrow="normal/tiny">
 80 640 m
 76 624 l
 </path>
-<path matrix="1 0 0 1.5 264 -368" stroke="brew7" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 264 -368" stroke="brew7" pen="heavier" arrow="normal/tiny">
 80 640 m
 84 624 l
 </path>
-<path matrix="1 0 0 1.5 264 -368" stroke="brew4" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 264 -368" stroke="brew4" pen="heavier" arrow="normal/tiny">
 96 640 m
 92 624 l
 </path>
-<path matrix="1 0 0 1.5 264 -368" stroke="brew7" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 264 -368" stroke="brew7" pen="heavier" arrow="normal/tiny">
 96 640 m
 100 624 l
 </path>
-<path matrix="1 0 0 1.5 264 -368" stroke="brew4" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 264 -368" stroke="brew4" pen="heavier" arrow="normal/tiny">
 112 640 m
 108 624 l
 </path>
-<path matrix="1 0 0 1.5 264 -368" stroke="brew7" arrow="normal/tiny">
+<path matrix="1 0 0 1.5 264 -368" stroke="brew7" pen="heavier" arrow="normal/tiny">
 112 640 m
 116 624 l
 </path>
@@ -637,7 +597,47 @@ h
 <use matrix="1 0 0 1.5 264 -368" name="mark/disk(sx)" pos="80 640" size="normal" stroke="black"/>
 <use matrix="1 0 0 1.5 264 -368" name="mark/disk(sx)" pos="96 640" size="normal" stroke="black"/>
 <use matrix="1 0 0 1.5 264 -368" name="mark/disk(sx)" pos="112 640" size="normal" stroke="black"/>
-<use layer="dag" matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="80 640" size="normal" stroke="black"/>
+<path layer="dag" stroke="brew1" pen="heavier" arrow="normal/tiny">
+200 592 m
+216 568 l
+</path>
+<path stroke="brew1" pen="heavier" arrow="normal/tiny">
+232 592 m
+216 568 l
+</path>
+<path stroke="brew1" pen="heavier" arrow="normal/tiny">
+264 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew4" pen="heavier" arrow="normal/tiny">
+200 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew4" pen="heavier" arrow="normal/tiny">
+232 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew4" pen="heavier" arrow="normal/tiny">
+264 592 m
+216 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew7" pen="heavier" arrow="normal/tiny">
+200 592 m
+264 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew7" pen="heavier" arrow="normal/tiny">
+232 592 m
+264 568 l
+</path>
+<path matrix="1 0 0 1 96 0" stroke="brew7" pen="heavier" arrow="normal/tiny">
+264 592 m
+264 568 l
+</path>
+<path stroke="brew3" pen="heavier" arrow="normal/tiny">
+216 592 m
+264 568 l
+</path>
+<use matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="80 640" size="normal" stroke="black"/>
 <use matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="96 640" size="normal" stroke="black"/>
 <use matrix="1 0 0 1.5 120 -368" name="mark/disk(sx)" pos="112 640" size="normal" stroke="black"/>
 <use matrix="1 0 0 1.5 168 -368" name="mark/disk(sx)" pos="80 640" size="normal" stroke="black"/>
