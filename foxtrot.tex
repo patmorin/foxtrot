@@ -16,13 +16,13 @@
 
 \titlerunning{First-Passage Percolation Time}
 
-\author{Pat Morin and others}
+\author{Luc Devroye, Abbas Mehrabian, and Pat Morin}
 %\author[1]{Pat Morin}
 %\affil[1]{Carleton University School of Computer Science, Ottawa, Canada \\
 %   \texttt{morin@scs.carleton.ca}}
 %\authorrunning{P. Morin} %mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et. al.'
 
-\Copyright{P. Morin}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+\Copyright{L. Devroye, A. Mehrabian, and P. Morin}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
 %\subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
 %\keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
@@ -92,15 +92,19 @@ $\ln(1+\sqrt{2})\approx 0.881$ as $d\rightarrow\infty$.  The difference
 between these two results is that Fill and Pemantle's paths are \emph{monotone}---they have exactly $d$ edges---while Martinsson's paths may have more than
 $d$ edges.
 
-The proof we present here is (arguably) simpler and more accessible to
-a computer science audience than either of the proofs discussed above.
-Our proof does not guarantee a monotone path; it produces paths using
-roughly $3d/2$ edges.  One nice feature of this new proof is that
-it employs a natural greedy strategy that results in an algorithm for
-finding an $O(1)$ weight path that runs in $O(d^4)$ time.  In distributed
-computing terms, this algorithm is 3-local, it can be implemented by an
-agent that only has information about edge weights in a neighbourhood
-of radius 3 about the current vertex.
+The proof we present here is (arguably) simpler and more accessible
+to a computer science audience than either of the proofs discussed
+above.  On the other hand, our proof only gives an $O(1)$ upper bound
+(approximately $303.61$) on the weight of the lightest path from $\zero$
+to $\one$ and doesn't give any lower bound.  It also does not guarantee
+a monotone path; it produces paths using roughly $3d/2$ edges.
+
+One nice feature of this new proof is that it employs a natural greedy
+strategy that results in an algorithm for finding an $O(1)$ weight
+path that runs in $O(d^4)$ time.  In distributed computing terms, this
+algorithm is 3-local, it can be implemented by an agent that only has
+information about edge weights in a neighbourhood of radius 3 about the
+current vertex.
 
 \section{Review of Probability Concepts}
 
@@ -173,7 +177,7 @@ first-passage percolation problem on a tree of height three.
 
 
 \begin{lemma}\label{lem:abc}
-Let $a>b\ge c\ge 1$ be integers and let $T$ be a rooted tree of height
+Let $a,b,c\ge 1$ be integers and let $T$ be a rooted tree of height
 three of whose root has $a$ children, each of which has $b$ children,
 each of which has $c$ children.  Assign an $\exponential(1)$ edge weight
 to each edge of $T$ and let $\rho(T)$ denote the weight of the lightest
@@ -188,7 +192,8 @@ value of $\rho(T)$.  We do this now, before proving
 Lemma~\ref{lem:abc}.
 
 \begin{corollary}\label{cor:expectation}
-  Let $a$, $b$, $c$, $T$, and $\rho(T)$ be defined as in Lemma~\ref{lem:abc}.  Then $\E[\rho(T)] \le C/(abc)^{1/3}$, for
+  Let $a$, $b$, $c$, $T$, and $\rho(T)$ be defined as in Lemma~\ref{lem:abc},
+  with $a\ge b\ge c\ge 1$.  Then $\E[\rho(T)] \le C/(abc)^{1/3}$, for
   $C=64 + 16\sqrt{\pi} + 16(1/12)^{2/3}\Gamma(1/3)$.
 \end{corollary}
 
@@ -257,9 +262,9 @@ Lemma~\ref{lem:abc}.
   \begin{align*}
      \Pr\{\rho(T) > t\} 
                     & \le \Pr\{N_3 = 0\} \\
-                    & \le \Pr\{N_3 = 0\mid N_2 \ge \E[N_2/2]\} \\
-                    &\quad{}+ \Pr\{N_2 < \E[N_2/2] \mid N_1 \ge \E[N_1/2]\} \\
-                    &\quad{}+ \Pr\{N_1 < \E[N_1/2]\} \\
+                    & \le \Pr\{N_3 = 0\mid N_2 \ge bat^2/256\} \\
+                    &\quad{}+ \Pr\{N_2 < bat^2/256 \mid N_1 \ge at/16\} \\
+                    &\quad{}+ \Pr\{N_1 < at/16\} \\
         & \le e^{-at/64} + e^{-bat^2/1024} + e^{-bat^3/768} \enspace .  \qedhere
   \end{align*}
 \end{proof}
@@ -269,7 +274,7 @@ Lemma~\ref{lem:abc}.
 We note that the result of Lemma~\ref{lem:abc} also holds in
 a slightly more general setting, an example of which is illustrated in
 Figure~\ref{fig:dag}. In particular, we can identify groups
-of leaves of $T$ to obtain a directed acyclic graph $D$ in which the
+of leaves of $T$ arbitrarily to obtain a directed acyclic graph $D$ in which the
 leaves of $T$ become sinks in $D$. The lemma then gives bounds on the
 probability that the weight of the lightest root-to-sink path exceeds $t$.
 \end{remark}
@@ -290,8 +295,8 @@ probability that the weight of the lightest root-to-sink path exceeds $t$.
 
 \begin{theorem}
   Let $Q_d$ be the $d$-cube equipped with independent $\exponential(1)$
-  edge weights.  Then there is a path from $\zero$ to $\one$ whose
-  expected weight is $O(1)$.
+  edge weights.  Then the expected weight of the lightest path from $\zero=(0,\ldots,0)$
+  to $\one=(1,\ldots,1)$ is $O(1)$.
 \end{theorem}
 
 \begin{proof}
@@ -304,7 +309,7 @@ probability that the weight of the lightest root-to-sink path exceeds $t$.
      \item If $i < d/2$, then the algorithm traverses the lightest edge
      joining $u$ to some vertex in $L_{i+1}$.  The weight of this edge is
      the minimum of $d-i$ independent $\exponential(1)$ random variables,
-     so the expected weight of this edge is at most $1/(d-i)\le 2/d$.
+     so the expected weight of this edge is $1/(d-i)\le 2/d$.
 
      \item If $i \ge d/2$, we consider the $i(d-i)^2$ paths $uxyz$ with
      $x\in L_{i-1}$, $y\in L_i\setminus\{u\}$, and $z\in L_{i+1}$ and
@@ -328,32 +333,31 @@ probability that the weight of the lightest root-to-sink path exceeds $t$.
   \begin{align*}
     \mu & \le \sum_{i=0}^{\lfloor (d-1)/2\rfloor} 2/d 
                + \sum_{i=\lceil d/2\rceil}^{d-1} Ci^{-1/3}(d-i)^{-2/3} \\
-        & \le 1 
+        & \le 2 
                + C\left(\sum_{i=\lceil d/2\rceil}^{d-1} i^{-1/3}(d-i)^{-2/3}\right) \\
-        & \le 1 
+        & \le 2 
                + C(d/2)^{-1/3}\left(\sum_{i=\lceil d/2\rceil}^{d-1} (d-i)^{-2/3}\right) \\
-        & = 1 
+        & = 2 
                + C(d/2)^{-1/3}\left(\sum_{k=1}^{\lfloor d/2\rfloor}k^{-2/3}\right) \\
-        & \le 1
+        & \le 2
                + C(d/2)^{-1/3}\left(1+\int_1^{d/2}x^{-2/3}\,dx\right) \\
-        & = 1
+        & = 2
                + C(d/2)^{-1/3}\left(3(d/2)^{1/3}-3\right) \\
-        & \le 1
+        & \le 2
                + 3C \enspace . \qedhere
   \end{align*}
 \end{proof}
 
 \section{Discussion}
 
-Our poof works for any continuous edge weight distribution that has
-density 1 at zero. Besides exponential distributions, another notable
-example is the uniform distribution over the interval $[0,1]$.  A careful
-rereading of our proofs will reveal that the only property required by
-the distribution is that the minimum of $k$ independent random samples
-from the distribution has expected value $O(1/k)$. This property is what
-allows the first $d/2$ steps of the greedy algorithm to produce a path
-of length at most $1$ and this property is sufficient to push through
-the proof of (suitably modified versions of) Lemma~\ref{lem:abc}.
+Our proof works for any non-negative continuous edge weight distribution
+that has density 1 around zero and whose tail decays exponentially.
+The first property ensures the minimum of $k$ independent random
+samples from the distribution has expected value $O(1/k)$. The second
+property ensures that there is are constants $T,c>0$ such that, for all
+$t>T$, $\Pr\{X > t\}\le e^{-ct}$.  Besides the $\exponential(\lambda)$
+distribution for constant $\lambda$, another notable example is the
+uniform distribution over the interval $[0,1]$.
 
 The weight of the path found in our proof is the sum of $d$ random
 variables. The first $d/2$ of these are independent $\exponential(1)$. The
@@ -362,9 +366,11 @@ steps) that are each independent.  Using standard methods for deriving
 concentration inqualities along with the fact that Lemma~\ref{lem:abc}
 gives an exponential tail bound on $\rho(T)$, it is possible to show
 that, for any $\delta >0$, $\Pr\{\mu\ge (1+\delta)(1+3C)\}\rightarrow 0$
-as $d\rightarrow\infty$.  Unfortunately, the rate of this convergence is
-not quite enough to prove that (for example) there is a path of weight
-$O(1)$ from $\zero$ to every vertex of $Q_d$.
+as $d\rightarrow\infty$.  Unfortunately, the rate of this convergence
+is not quite enough to prove that with high probability there is a path
+of weight $O(1)$ from $\zero$ to \emph{every} vertex of $Q_d$.
+This latter fact is something that Fill and Pemantle's proof does manage
+to show \cite{fill.pemantle:percolation}.
 
 A conjecture of Aldous \cite[Conjecture~G7.1]{aldous:probability}
 was the original motivation for the work of Fill and Pemantle.  In his
@@ -392,12 +398,23 @@ using a variety of advanced probabilistic tools to study this process.
 This branching translation process was used by Fill and Pemantle's
 original work to provide a lower bound on $w(\zero,\one)$.
 
-Finally, we point out that the first-passage percolation time in a graph
-$G$ with i.i.d.\ exponential edge weights is closely related to the height
-of the lightest path tree $T$ of $G$. Devroye \etal\ \cite{devroye.dujmovic.ea:notes}
-describe a relationship between first-passage percolation time, the
-number of simple paths in $G$ and the height of $T$ and use this to
-derive tight bounds on the height of $T$ for many classes of graphs.
+Finally, we point out that the first-passage percolation time in a
+graph $G$ with i.i.d.\ exponential edge weights is closely related
+to the the maximum number of edges, $h(G,s)$, in the lightest
+path from some vertex $s$ any other vertex of $G$.  Devroye \etal\
+\cite{devroye.dujmovic.ea:notes} describe a relationship between
+first-passage percolation time, the number of simple paths in $G$ and
+$h(G,s)$ and use this to derive bounds on $\E[h(G,s)]$ that are tight
+for many classes of graphs.
+
+
+\section*{Acknowledgements}
+
+We would like to thank Alan~Frieze and G\'abor Lugosi for helpful
+discussions and suggestions.  This work was born of discussions that
+took place during the Workshop on Random Geometric Graphs and Their
+Applications to Complex Networks, at the Banff International Research
+Station, November 6--11, 2016.
 
 \bibliography{foxtrot}
 
