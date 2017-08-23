@@ -350,14 +350,15 @@ probability that the weight of the lightest root-to-sink path exceeds $t$.
 
 \section{Discussion}
 
-Our proof works for any non-negative continuous edge weight distribution
-that has density 1 around zero and whose tail decays exponentially.
-The first property ensures the minimum of $k$ independent random
-samples from the distribution has expected value $O(1/k)$. The second
-property ensures that there is are constants $T,c>0$ such that, for all
-$t>T$, $\Pr\{X > t\}\le e^{-ct}$.  Besides the $\exponential(\lambda)$
-distribution for constant $\lambda$, another notable example is the
-uniform distribution over the interval $[0,1]$.
+Our proof works for any edge weight distribution with a probability
+density function that is strictly positive in some right neighbourhood
+of 0 and whose tail decays exponentially.  These properties ensure the
+minimum of $k$ independent random samples from the distribution has
+expected value $O(1/k)$. The second property also ensures that there is
+are constants $T,c>0$ such that, for all $t>T$, $\Pr\{X > t\}\le e^{-ct}$.
+Besides the $\exponential(\lambda)$ distribution for constant $\lambda$,
+another notable example is the uniform distribution over the interval
+$[0,1]$.
 
 The weight of the path found in our proof is the sum of $d$ random
 variables. The first $d/2$ of these are independent $\exponential(1)$. The
